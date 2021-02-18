@@ -21,6 +21,9 @@ let actions = {
             })
         })
     },
+    updateUser({commit}, user) {
+        
+    },
     logout({commit}){
         axios.get('auth/api/logout').then(response => {
             commit('LOGOUT')

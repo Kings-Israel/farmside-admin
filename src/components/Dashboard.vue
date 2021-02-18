@@ -1,144 +1,144 @@
 <template>
     <div id="app" class="page-wrapper chiller-theme toggled">
-        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
-                <i class="fas fa-bars"></i>
-        </a>
-        <nav id="sidebar" class="sidebar-wrapper">
-            <div class="sidebar-content">
-            <div class="sidebar-brand">
-                <a href="#">
-                <p>Farmside</p>
-                </a>
-                <div id="close-sidebar">
-                <i class="fas fa-times"></i>
-                </div>
+      <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+        <i class="fas fa-bars"></i>
+      </a>
+      <nav id="sidebar" class="sidebar-wrapper">
+        <div class="sidebar-content">
+          <div class="sidebar-brand">
+            <a href="#">
+              <img class="sidebar-image" src="../assets/backgrounds/Artboard 3.jpg" alt="">
+            </a>
+            <div id="close-sidebar">
+              <i class="fas fa-times"></i>
             </div>
-            <div class="sidebar-header">
-                <div class="user-pic">
-                <img class="img-responsive img-rounded" src=""
-                    alt="User picture">
-                </div>
-                <div class="user-info">
-                <span class="user-name">
-                    <strong>{{ user.name }}</strong>
-                </span>
-                <span class="user-role">{{ user.email }}</span>
-                </div>
+          </div>
+          <div class="sidebar-header">
+            <div class="user-pic">
+              <img class="img-responsive img-rounded" src=""
+                  alt="User picture">
             </div>
-            <div class="sidebar-menu">
-                <ul>
-                <li class="header-menu">
-                    <span>General</span>
-                </li>
-                <li class="sidebar-dropdown">
-                    <router-link :to="{name: 'Bookings'}">
-                        <i class="fa fa-comment"></i>
-                        <span>Bookings</span>
-                    </router-link>
-                </li>
+            <div class="user-info">
+              <span class="user-name">
+                  <strong>{{ user.name }}</strong>
+              </span>
+              <span class="user-role">{{ user.email }}</span>
+            </div>
+          </div>
+          <div class="sidebar-menu">
+            <ul>
+              <li class="header-menu">
+                <span>General</span>
+              </li>
+            <li class="sidebar-dropdown">
+              <router-link :to="{name: 'Bookings'}">
+                <i class="fa fa-comment"></i>
+                <span>Bookings</span>
+              </router-link>
+            </li>
 
-                <li class="sidebar-dropdown">
-                    <router-link :to="{name: 'Messages'}">
-                    <i class="fas fa-user"></i>
-                    <span>Messages</span>
-                    </router-link>
-                    <div class="sidebar-submenu">
-                    <ul>
-                        <li>
-                        <a href="#">New Bookings</a>
-                        </li>
-                    </ul>
-                    </div>
+            <li class="sidebar-dropdown">
+              <router-link :to="{name: 'Messages'}">
+                <i class="fas fa-user"></i>
+                <span>Messages</span>
+              </router-link>
+              <div class="sidebar-submenu">
+                <ul>
+                  <li>
+                    <a href="#">New Bookings</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+              <li class="sidebar-dropdown">
+                <a href="#">
+                  <i class="far fa-gem"></i>
+                  <span>Website Components</span>
+                </a>
+                <div class="sidebar-submenu">
+                  <ul>
+                    <li>
+                      <a href="#">General</a>
+                    </li>
+                    <li>
+                      <a href="#">Panels</a>
+                    </li>
+                    <li>
+                      <a href="#">Tables</a>
+                    </li>
+                    <li>
+                      <a href="#">Icons</a>
+                    </li>
+                    <li>
+                      <a href="#">Forms</a>
+                    </li>
+                  </ul>
+                </div>
                 </li>
                 <li class="sidebar-dropdown">
-                    <a href="#">
-                    <i class="far fa-gem"></i>
-                    <span>Website Components</span>
-                    </a>
-                    <div class="sidebar-submenu">
-                    <ul>
-                        <li>
-                        <a href="#">General</a>
-                        </li>
-                        <li>
-                        <a href="#">Panels</a>
-                        </li>
-                        <li>
-                        <a href="#">Tables</a>
-                        </li>
-                        <li>
-                        <a href="#">Icons</a>
-                        </li>
-                        <li>
-                        <a href="#">Forms</a>
-                        </li>
-                    </ul>
-                    </div>
-                </li>
-                <li class="sidebar-dropdown">
-                    <a href="#">
+                  <a href="#">
                     <i class="fas fa-chart-line"></i>
                     <span>Charts</span>
-                    </a>
-                    <div class="sidebar-submenu">
+                  </a>
+                  <div class="sidebar-submenu">
                     <ul>
-                        <li>
+                      <li>
                         <a href="#">Gym Attendance</a>
-                        </li>
-                        <li>
+                      </li>
+                      <li>
                         <a href="#">Sales</a>
-                        </li>
+                      </li>
                     </ul>
-                    </div>
+                  </div>
                 </li>
                 <li class="sidebar-dropdown">
-                    <a href="#">
+                  <a href="#">
                     <i class="fa fa-globe"></i>
                     <span>Misc</span>
-                    </a>
-                    <div class="sidebar-submenu">
+                  </a>
+                  <div class="sidebar-submenu">
                     <ul>
-                        <li>
+                      <li>
                         <a href="#">Packages</a>
-                        </li>
-                        <li>
+                      </li>
+                      <li>
                         <a href="#">Quotes</a>
-                        </li>
+                      </li>
                     </ul>
-                    </div>
+                  </div>
                 </li>
                 <li class="header-menu">
-                    <span>Extra</span>
+                  <span>Extra</span>
                 </li>
                 <li>
-                    <a href="#">
+                  <a href="#">
                     <i class="fa fa-book"></i>
                     <span>Documentation</span>
-                    </a>
+                  </a>
                 </li>
                 <li>
-                    <a href="#">
+                  <a href="#">
                     <i class="fa fa-calendar"></i>
                     <span>Calendar</span>
-                    </a>
+                  </a>
                 </li>
-                </ul>
+              </ul>
             </div>
             <!-- sidebar-menu  -->
-            </div>
-            <!-- sidebar-content  -->
-            <div class="sidebar-footer">
-            <a href="#">
-                <i class="fa fa-envelope"></i>
-                <span class="badge badge-pill badge-success notification">7</span>
-            </a>
-            <a href="#">
-                <i class="fa fa-cog"></i>
-            </a>
-            <a href="#">
-                <i @click="logout" class="fa fa-power-off"></i>
-            </a>
-            </div>
+        </div>
+        <!-- sidebar-content  -->
+        <div class="sidebar-footer">
+          <a href="#">
+            <i class="fa fa-envelope"></i>
+            <span class="badge badge-pill badge-success notification">7</span>
+          </a>
+          <router-link :to="{name: 'EditInfo'}">
+            <i class="fa fa-cog"></i>
+          </router-link>
+          <a href="#">
+            <i @click="logout" class="fa fa-power-off"></i>
+          </a>
+        </div>
         </nav>
         <!-- Content -->
         <main class="page-content">
@@ -208,7 +208,6 @@ export default {
 
 
 <style scoped>
-
 @keyframes swing {
     0% {
       transform: rotate(0deg);
@@ -358,6 +357,11 @@ export default {
     text-transform: uppercase;
     font-weight: bold;
     flex-grow: 1;
+  }
+
+  .sidebar-image {
+    border-radius: 5px;
+    width: 170px;
   }
   
   .sidebar-wrapper .sidebar-brand #close-sidebar {

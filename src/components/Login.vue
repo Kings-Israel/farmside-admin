@@ -57,7 +57,7 @@ export default {
                 console.log(err)
                 this.error = true
             })
-        }
+        },
     },
     mounted() {
         M.AutoInit()
