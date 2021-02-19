@@ -17,39 +17,28 @@
             <button @click="removeImage" class="btn mt-2" style="float: right">Remove image</button>
             <button @click="onUpload" class="btn mt-2 mr-2" style="float: right">Upload</button>
         </div> -->
-        <upload-image is="upload-image"
-            :url="onUpload"
-            :max_files="5"
-            name="files[]"
-            :resize_enabled="true"
-            :resize_max_width="640"
-            button_html="button_html"
-            button_class="btn btn-success"
-            v-on:upload-image-attemp="uploadImageAttempt"
-            v-on:upload-image-success="uploadImageSuccess"
-            v-on:upload-image-failure="uploadImageFailure"
-            v-on:upload-image-loaded="uploadImageLoaded"
-            v-on:upload-image-submit="uploadImageSubmit"
-            v-on:upload-image-clicked="uploadImageClicked"
-            v-on:upload-image-removed="uploadImageRemoved"
-        ></upload-image>
+        <div class="file-field input-field">
+            <div class="btn grey">
+                <span>Image</span>
+                <input type="file" name="image" @change="onFileChange" >
+            </div>
+            <div class="file-path-wrapper">
+                <input type="text" class="file-path validate">
+            </div>
+        </div>
+        <button @click="onUpload" class="btn mt-2 mr-2" style="float: right">Upload</button>
     </div>
 </template>
 
 <script>
 import 'material-design-icons/iconfont/material-icons.css'
 import M from 'materialize-css'
-import UploadImage from 'vue-upload-image'
 export default {
     name: "ImageUploader",
     props: ['id', 'profile_pic'],
-    components: {
-        UploadImage
-    },
     data() {
         return {
-            image: '',
-            files: null
+            files: null,
         }
     },
     methods: {
@@ -62,7 +51,7 @@ export default {
         onUpload() {
             const formData = new FormData()
             formData.append('id', this.id)
-            formData.append('image', this.files[0], this.files[0].name)
+            formData.append('image', this.files[0])
             this.$store.dispatch('uploadImage', formData)
         },
         createImage(file) {

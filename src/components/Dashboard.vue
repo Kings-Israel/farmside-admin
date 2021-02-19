@@ -15,7 +15,7 @@
           </div>
           <div class="sidebar-header">
             <div class="user-pic">
-              <img class="img-responsive img-rounded" :src="user.profile_pic"
+              <img class="img-responsive img-rounded" :src="'http://localhost:5000/admin/profile_pics/'+user.profile_pic"
                   alt="User picture">
             </div>
             <div class="user-info">

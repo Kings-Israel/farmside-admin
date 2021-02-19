@@ -30,8 +30,10 @@ let actions = {
         })
     },
     async uploadImage({commit}, image) {
-        await axios.post('/user/image', image).then(response => {
-            console.log(response.data)
+        await axios.post('/user/uploadImage/', image)
+        .then(response => {
+            commit('PROFILE_PIC_UPDATED')
+            commit('USER_INFO', response.data)
         })
     },
     logout({commit}){
