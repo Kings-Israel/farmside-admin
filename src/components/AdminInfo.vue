@@ -1,18 +1,5 @@
 <template>
     <div class="row">
-        <!-- Modal Trigger -->
-        <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
-
-        <!-- Modal Structure -->
-        <div id="modal1" class="modal">
-            <div class="modal-content">
-            <h4>Modal Header</h4>
-            <p>A bunch of text</p>
-            </div>
-            <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-            </div>
-        </div>
         <div class="col s12">
             <form @submit.prevent="update" id="update-form">
                 <i class="large material-icons account_circle">account_circle</i>
@@ -25,20 +12,20 @@
                     <i class="material-icons prefix">phone</i>
                     <input id="icon_prefix" type="number" class="validate" v-model="form.phone_number">
                     <label for="icon_prefix">Phone Number <b>(Current Phone Number: {{ user.phone_number }})</b></label>
+                    <div class="error">{{ errors.phone }}</div>
                 </div>
                 <div class="input-field">
                     <i class="material-icons prefix">email</i>
                     <input id="icon_prefix" type="text" class="validate" v-model="form.email">
                     <label for="icon_prefix">Email <b>(Current Email: {{ user.email }})</b></label>
                 </div>
-                <div class="input-field">
-                    <i class="material-icons prefix">lock_outline</i>
-                    <input id="password" type="password" v-model="form.password">
-                    <label for="password">Password</label>
+                <!-- Implement password changing -->
+                <div id="form-footer">
+                    <button class="waves-effect waves-light btn-small">Update</button>
+                    <div v-if="success" class="success"><i class="material-icons prefix">done</i>Updated Your Info.</div>
+                    <div v-if="failed" class="failed"><i class="material-icons prefix">close</i>Please try again.</div>
                 </div>
-                <button class="waves-effect waves-light btn-small">Update</button>
             </form>
-            <div v-if="error" class="error">Invalid Email or Password</div>
         </div>
     </div>
 </template>
@@ -46,6 +33,7 @@
 <script>
 import 'material-design-icons/iconfont/material-icons.css'
 import M from 'materialize-css'
+import { mapGetters } from 'vuex';
 
 const validatePhone = phone => {
   if (!phone.match(/^(?:254|\+254|0)?(7(?:(?:[12][0-9])|(?:0[0-8])|(9[0-2]))[0-9]{6})$/gm)) {
@@ -61,30 +49,62 @@ export default {
     data() {
         return {
             form: {
+                id: this.user._id,
                 name: '',
                 phone_number: '',
                 email: '',
-                password: ''
             },
             valid: true,
-            errors: {}
+            errors: {},
+            icon: '',
+            message: '',
+            success: false,
+            failed: false
         }
     },
     methods: {
         update() {
             this.errors = {}
-            const validPhone = validatePhone(this.form.phone_number)
-            this.errors.phone = validPhone.error
-            this.valid = validPhone.valid
+            if (this.form.name === '') {
+                this.form.name = this.user.name
+            }
+            if (this.form.email === '') {
+                this.form.email = this.user.email
+            }
+            if(this.form.phone_number !== '') {
+                const validPhone = validatePhone(this.form.phone_number)
+                this.errors.phone = validPhone.error
+                this.valid = validPhone.valid
+            }
 
             if(this.valid) {
-                
+                this.$store.dispatch('updateUser', this.form).then(() => {
+                    if(this.status === 'Updated User') {
+                        this.form.name = ''
+                        this.form.email = ''
+                        this.form.phone_number = ''
+                        this.success = true
+                        setTimeout(() => {
+                            this.success = false
+                        }, 4000)
+                    } else {
+                        this.failed = true
+                        setTimeout(() => {
+                            this.failed = false
+                        }, 4000)
+                    }
+                })
             }
         }
     },
     mounted() {
         M.AutoInit()
     },
+    computed: {
+        ...mapGetters([
+            'status'
+        ])
+    }
 }
 </script>
 
@@ -95,7 +115,24 @@ export default {
     margin-left: 220px;
 }
 
-#update-form > button {
+.error {
+    margin-left: 180px;
+    font-size: 15px;
+    color: rgb(252, 11, 11);
+}
+
+#form-footer {
+    display: flex;
     margin-left: 220px;
+}
+
+#form-footer .success {
+    margin-left: 10px;
+    color: rgb(34, 85, 38);
+}
+
+#form-footer .failed {
+    margin-left: 10px;
+    color: rgb(252, 11, 11);
 }
 </style>

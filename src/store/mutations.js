@@ -13,7 +13,7 @@ let mutations = {
         state.status = 'Logged Out'
         state.token = ''
     },
-    USER_UPDATE(state) {
+    USER_UPDATED(state) {
       state.status = 'Updated User'
     },
     USER_INFO(state, user) {

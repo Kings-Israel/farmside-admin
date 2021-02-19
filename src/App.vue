@@ -11,6 +11,7 @@ export default {
 </script>
 
 <style>
-#app {
+* {
+  transition: .3s;
 }
 </style>

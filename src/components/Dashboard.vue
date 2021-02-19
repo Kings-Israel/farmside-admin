@@ -15,7 +15,7 @@
           </div>
           <div class="sidebar-header">
             <div class="user-pic">
-              <img class="img-responsive img-rounded" src=""
+              <img class="img-responsive img-rounded" :src="user.profile_pic"
                   alt="User picture">
             </div>
             <div class="user-info">

@@ -6,7 +6,7 @@
                     <admin-info :user="user" />
                 </div>
                 <div class="col s6">
-                    <image-uploader />
+                    <image-uploader :id="user._id" :profile_pic="user.profile_pic" />
                 </div>
             </div>
         </div>
@@ -15,7 +15,7 @@
 
 <script>
 import M from 'materialize-css'
-import {mapGetters} from 'vuex'
+import { mapGetters } from 'vuex'
 import AdminInfo from './AdminInfo'
 import ImageUploader from './ImageUploader'
 export default {

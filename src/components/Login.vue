@@ -69,12 +69,12 @@ export default {
 @import 'materialize-css/dist/css/materialize.min.css';
 
 #background {
-    margin-top: 200px;
+    margin-top: 150px;
 }
 #login-form {
     width: 350px;
     margin-left: 150px;
-    margin-top: 200px;
+    margin-top: 150px;
 }
 .account_circle {
     margin-left: 150px;
