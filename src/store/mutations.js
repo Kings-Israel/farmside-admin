@@ -18,6 +18,9 @@ let mutations = {
     },
     USER_INFO(state, user) {
         state.user = user
+    },
+    PROFILE_PIC_UPDATED(state) {
+        state.status = 'Updated Profile Picture'
     }
 }
 

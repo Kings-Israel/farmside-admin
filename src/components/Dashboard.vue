@@ -150,12 +150,14 @@
 </template>
 
 <script>
+import axios from 'axios'
 import jQuery from 'jquery'
 import {mapGetters} from 'vuex'
 export default {
     name: "Dashboard",
     data() {
       return {
+        profile_pic: null
       }
     },
     methods: {
@@ -165,6 +167,8 @@ export default {
           this.$router.push({name: 'Login'})
         })
       },
+    },
+    mounted() {
     },
     created() {
       jQuery(function ($) {

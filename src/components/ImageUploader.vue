@@ -1,10 +1,10 @@
 <template>
     <div>
         <h5>Change Profile Picture</h5>
-        <!-- <div v-if="!profile_pic" class="file-field input-field">
-            <div class="btn">
-                <span>File</span>
-                <input type="file" name="image" @change="onFileChange">
+        <!-- <div v-if="!files" class="file-field input-field">
+            <div class="btn grey">
+                <span>Image</span>
+                <input type="file" name="image" @change="onFileChange" >
             </div>
             <div class="file-path-wrapper">
                 <input class="file-path validate" type="text">
@@ -12,10 +12,10 @@
         </div>
         <div v-else>
             <div class="image-container">
-                <img class="profile_pic" :src="profile_pic" />
+                <img class="profile_pic" :src="files" />
+                <button @click="removeImage" class="btn mt-2 mr-2" style="float: right">Remove image</button>
+                <button @click="onUpload" class="btn mt-2" style="float: right">Upload</button>
             </div>
-            <button @click="removeImage" class="btn mt-2" style="float: right">Remove image</button>
-            <button @click="onUpload" class="btn mt-2 mr-2" style="float: right">Upload</button>
         </div> -->
         <div class="file-field input-field">
             <div class="btn grey">
@@ -27,32 +27,56 @@
             </div>
         </div>
         <button @click="onUpload" class="btn mt-2 mr-2" style="float: right">Upload</button>
+        <div class="message-box">
+            <div v-if="success" class="success"><i class="material-icons prefix">done</i>Updated Your Info.</div>
+            <div v-if="failed" class="failed"><i class="material-icons prefix">close</i>Please try again.</div>
+        </div>
+        <div class="image-container">
+            <img :src="files" alt="" class="profile_pic">
+        </div>
     </div>
 </template>
 
 <script>
 import 'material-design-icons/iconfont/material-icons.css'
 import M from 'materialize-css'
+import { mapGetters } from 'vuex'
 export default {
     name: "ImageUploader",
     props: ['id', 'profile_pic'],
     data() {
         return {
             files: null,
+            image: null,
+            success: false,
+            failed: false,
         }
     },
     methods: {
         onFileChange(e) {
-            this.files = e.target.files || e.dataTransfer.files;
-            if (!this.files.length)
+            this.image = e.target.files || e.dataTransfer.files;
+            if (!this.image.length)
                 return;
-            this.createImage(this.files[0]);
+            this.createImage(this.image[0]);
+            this.files = e.target.files || e.dataTransfer.files;
         },
         onUpload() {
             const formData = new FormData()
             formData.append('id', this.id)
-            formData.append('image', this.files[0])
-            this.$store.dispatch('uploadImage', formData)
+            formData.append('image', this.image[0])
+            this.$store.dispatch('uploadImage', formData).then(() => {
+                if(this.status === 'Updated Profile Picture') {
+                    this.success = true
+                    setTimeout(() => {
+                        this.success = false
+                    }, 3000);
+                } else {
+                    this.failed = true
+                    setTimeout(() => {
+                        this.failed = false
+                    }, 4000);
+                }
+            })
         },
         createImage(file) {
             var image = new Image();
@@ -60,19 +84,24 @@ export default {
             var vm = this;
 
             reader.onload = (e) => {
-                vm.image = e.target.result;
+                vm.files = e.target.result;
             };
             reader.readAsDataURL(file);
         },
 
         removeImage: function (e) {
-            this.image = '';
+            this.files = '';
         },
         
     },
     mounted() {
         M.AutoInit()
     },
+    computed: {
+        ...mapGetters([
+            'status'
+        ])
+    }
 }
 </script>
 
@@ -84,5 +113,20 @@ export default {
     width: 450px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+.message-box {
+    display: flex;
+    float: left;
+}
+
+.success {
+    margin-left: 10px;
+    color: rgb(34, 85, 38);
+}
+
+.failed {
+    margin-left: 10px;
+    color: rgb(252, 11, 11);
 }
 </style>
