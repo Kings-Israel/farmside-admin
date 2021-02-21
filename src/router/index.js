@@ -4,9 +4,8 @@ import Bookings from '@/components/Bookings'
 import Login from '@/components/Login'
 import Dashboard from '@/components/Dashboard'
 import Messages from '@/components/Messages'
+import AboutSection from '@/components/AboutSection'
 import EditAdmin from '@/components/EditAdmin'
-import AdminInfo from '@/components/AdminInfo'
-import ImageUploader from '@/components/ImageUploader'
 
 Vue.use(Router)
 
@@ -41,6 +40,14 @@ let router = new Router({
           path: '/messages',
           name: 'Messages',
           component: Messages,
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          path: 'about',
+          name: 'AboutSection',
+          component: AboutSection,
           meta: {
             requiresAuth: true
           }

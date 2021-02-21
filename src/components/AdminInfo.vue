@@ -22,8 +22,6 @@
                 <!-- Implement password changing -->
                 <div id="form-footer">
                     <button class="waves-effect waves-light btn-small">Update</button>
-                    <div v-if="success" class="success"><i class="material-icons prefix">done</i>Updated Your Info.</div>
-                    <div v-if="failed" class="failed"><i class="material-icons prefix">close</i>Please try again.</div>
                 </div>
             </form>
         </div>
@@ -58,8 +56,6 @@ export default {
             errors: {},
             icon: '',
             message: '',
-            success: false,
-            failed: false
         }
     },
     methods: {
@@ -83,15 +79,9 @@ export default {
                         this.form.name = ''
                         this.form.email = ''
                         this.form.phone_number = ''
-                        this.success = true
-                        setTimeout(() => {
-                            this.success = false
-                        }, 4000)
+                        this.$notify({type: 'success', text: '<h5>Info Updated!!</h5>'})
                     } else {
-                        this.failed = true
-                        setTimeout(() => {
-                            this.failed = false
-                        }, 4000)
+                        this.$notify({type: 'error', text: '<h5>Failed to Update!!</h5>'})
                     }
                 })
             }
@@ -124,15 +114,5 @@ export default {
 #form-footer {
     display: flex;
     margin-left: 220px;
-}
-
-#form-footer .success {
-    margin-left: 10px;
-    color: rgb(34, 85, 38);
-}
-
-#form-footer .failed {
-    margin-left: 10px;
-    color: rgb(252, 11, 11);
 }
 </style>

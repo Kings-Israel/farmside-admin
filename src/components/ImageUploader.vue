@@ -26,11 +26,7 @@
                 <input type="text" class="file-path validate">
             </div>
         </div>
-        <button @click="onUpload" class="btn mt-2 mr-2" style="float: right">Upload</button>
-        <div class="message-box">
-            <div v-if="success" class="success"><i class="material-icons prefix">done</i>Updated Your Info.</div>
-            <div v-if="failed" class="failed"><i class="material-icons prefix">close</i>Please try again.</div>
-        </div>
+        <button @click="onUpload" class="btn mt-2 mr-2" style="display: flex; margin-left: 220px;">Upload</button>
         <div class="image-container">
             <img :src="files" alt="" class="profile_pic">
         </div>
@@ -66,15 +62,10 @@ export default {
             formData.append('image', this.image[0])
             this.$store.dispatch('uploadImage', formData).then(() => {
                 if(this.status === 'Updated Profile Picture') {
-                    this.success = true
-                    setTimeout(() => {
-                        this.success = false
-                    }, 3000);
+                    this.$notify({type: 'success', text: '<h5>Profile Pic Updated!!</h5>'})
+                    this.files = null
                 } else {
-                    this.failed = true
-                    setTimeout(() => {
-                        this.failed = false
-                    }, 4000);
+                    this.$notify({type: 'error', text: '<h5>Please try again!!</h5>'})
                 }
             })
         },

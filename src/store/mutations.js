@@ -13,6 +13,18 @@ let mutations = {
         state.status = 'Logged Out'
         state.token = ''
     },
+    UPDATE_ABOUT_MAIN_SECTION(state) {
+        state.status = 'Main Section Updated'
+    },
+    ABOUT_SECTION_MAIN_CONTENT(state, mainSection) {
+        state.aboutMainSection = mainSection
+    },
+    UPDATE_ABOUT_SUB_SECTION(state) {
+        state.status = 'Sub Section Updated'
+    },
+    ABOUT_SECTION_SUB_CONTENT(state, subSection) {
+        state.aboutSubSection = subSection
+    },
     USER_UPDATED(state) {
       state.status = 'Updated User'
     },

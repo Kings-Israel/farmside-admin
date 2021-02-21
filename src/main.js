@@ -7,9 +7,11 @@ import App from './App'
 import router from './router'
 import store from './store'
 import axios from 'axios'
+import Notifications from 'vue-notification'
 
 axios.defaults.baseURL = 'http://localhost:5000'
 
+Vue.use(Notifications)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

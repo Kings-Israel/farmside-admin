@@ -28,6 +28,20 @@ let actions = {
             console.log(error)
         }
     },
+    async updateAboutMainSection({commit}, content) {
+        let main = await axios.post('/about/updateMain', content)
+        if (main.data.message === 'success') {
+            commit('UPDATE_ABOUT_MAIN_SECTION')
+            commit('ABOUT_SECTION_MAIN_CONTENT', main.data.main)
+        }
+    },
+    async updateAboutSubSection({commit}, content) {
+        let sub = await axios.post('/about/updateSub', content)
+        if (sub.data.message === 'success') {
+            commit('UPDATE_ABOUT_SUB_SECTION')
+            commit('ABOUT_SECTION_SUB_CONTENT', sub.data.sub)
+        }
+    },
     async updateUser({commit}, user) {
         await axios.post(`/user/updateInfo/${user.id}`, user)
         .then(response => {

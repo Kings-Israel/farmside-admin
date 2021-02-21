@@ -58,7 +58,7 @@
                 <div class="sidebar-submenu">
                   <ul>
                     <li>
-                      <a href="#">General</a>
+                      <router-link :to="{name: 'AboutSection'}">About Section</router-link>
                     </li>
                     <li>
                       <a href="#">Panels</a>
@@ -145,6 +145,7 @@
             <div class="container-fluid">
                 <router-view />
             </div>
+            <notifications position="bottom right" duration:6000/>
         </main>
     </div>
 </template>
