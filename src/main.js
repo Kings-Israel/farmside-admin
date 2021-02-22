@@ -8,9 +8,11 @@ import router from './router'
 import store from './store'
 import axios from 'axios'
 import Notifications from 'vue-notification'
+import TextareaAutosize from 'vue-textarea-autosize'
 
 axios.defaults.baseURL = 'http://localhost:5000'
 
+Vue.use(TextareaAutosize)
 Vue.use(Notifications)
 Vue.config.productionTip = false
 

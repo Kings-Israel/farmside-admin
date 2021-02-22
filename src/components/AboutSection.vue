@@ -1,25 +1,35 @@
 <template>
     <div class="about_section">
-        <h3 class="m-0" style="right: 0">About Section Content</h3>
+        <h3 id="page-header">About Content</h3>
         <div id="main_section">
             <h5>About Section Main Content</h5>
-            <form class="col s12" @submit.prevent="uploadMain">
+            <form class="col s12" @submit.prevent="uploadMain" id="mainForm">
                 <div class="input-field col s12">
-                    <input type="hidden" value="aboutMain" v-model="aboutSection">
-                    <textarea id="textarea1" class="materialize-textarea" :value="aboutMainSection"></textarea>
-                    <label for="textarea1">Main Section Text</label>
+                    <textarea-autosize
+                        class="textarea"
+                        placeholder="Type Something"
+                        :min-height="50"
+                        :max-height="250"
+                        v-model="main_section_content"
+                    />
                 </div>
-                <button type="submit" class="btn btn-outline-secondary mt-2">Submit</button>
+                <button type="submit" class="btn btn-outline-secondary mt-2 w-50">Submit</button>
             </form>
         </div>
+        <hr>
         <div class="row">
             <div class="col 5">
                 <div id="sub_section">
-                    <h4>About Section Sub Content</h4>
-                    <form @submit.prevent="uploadSub">
+                    <h5>About Section Sub Content</h5>
+                    <form @submit.prevent="uploadSub" id="subForm">
                         <div class="input-field col s12">
-                            <textarea id="textarea1" class="materialize-textarea" :value="aboutSubSection"></textarea>
-                            <label for="textarea1">Sub Section Text</label>
+                            <textarea-autosize
+                                class="textarea"
+                                placeholder="Type Something"
+                                :min-height="50"
+                                :max-height="250"
+                                v-model="sub_section_content"
+                            />
                         </div>
                         <button type="submit" class="btn btn-outline-secondary mt-2">Submit</button>
                     </form>
@@ -27,11 +37,14 @@
             </div>
             <div class="col 7">
                 <div id="photos_section">
-                    <h4>About Photos</h4>
+                    <h5>About Photos</h5>
                     <!-- Use vue-uploader-component -->
                 </div>
             </div>
         </div>
+        <p>{{aboutMainSection.content}}</p>
+        <hr>
+        <p>{{aboutSubSection.content}}</p>
     </div>
 </template>
 
@@ -43,17 +56,23 @@ export default {
     name: "AboutSection",
     data() {
         return {
-            aboutSection: '',
+            aboutSection: {
+                mainSection: 'aboutMainSection',
+                subSection: 'aboutSubSection'
+            },
             main_section_content: '',
             sub_section_content: '',
         }
     },
     methods: {
         uploadMain(){
-            console.log(this.aboutSection)
+            console.log({
+                section: this.aboutSection.mainSection,
+                content: this.main_section_content
+            })
             this.$store.dispatch('updateAboutMainSection', {
-                name: this.aboutSection,
-                content: this.aboutMainSection
+                name: this.aboutSection.mainSection,
+                content: this.main_section_content
             })
             .then(() => {
                 if(this.status === 'Main Section Updated') {
@@ -64,7 +83,10 @@ export default {
             })
         },
         uploadSub(){
-            this.$store.dispatch('updateAboutSubSection', this.aboutSubSection)
+            this.$store.dispatch('updateAboutSubSection', {
+                name: this.aboutSection.subSection,
+                content: this.sub_section_content
+            })
             .then(() => {
                 if(this.status === 'Sub Section Updated') {
                     this.$notify({type: 'success', text: 'Section Updated!!'})
@@ -87,5 +109,27 @@ export default {
 
 <style scoped>
 @import 'materialize-css/dist/css/materialize.min.css';
+#main_section h5 {
+    text-align: center;
+}
 
+.textarea {
+    border: none;
+    border-bottom: 3px solid rgb(0, 0, 0);
+    transition: .5s ease-out;
+    
+}
+
+.textarea:focus {
+    border: none;
+    border-bottom: 5px solid rgb(0, 0, 0);
+}
+
+#mainForm {
+    text-align: center;
+}
+
+#subForm {
+    text-align: center;
+}
 </style>

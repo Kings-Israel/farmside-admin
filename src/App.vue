@@ -14,4 +14,8 @@ export default {
 * {
   transition: .3s;
 }
+#page-header {
+  margin-top: 0;
+  text-align: right;
+}
 </style>
