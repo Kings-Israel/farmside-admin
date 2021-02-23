@@ -1,26 +1,10 @@
 <template>
     <div>
         <h5>Change Profile Picture</h5>
-        <!-- <div v-if="!files" class="file-field input-field">
-            <div class="btn grey">
-                <span>Image</span>
-                <input type="file" name="image" @change="onFileChange" >
-            </div>
-            <div class="file-path-wrapper">
-                <input class="file-path validate" type="text">
-            </div>
-        </div>
-        <div v-else>
-            <div class="image-container">
-                <img class="profile_pic" :src="files" />
-                <button @click="removeImage" class="btn mt-2 mr-2" style="float: right">Remove image</button>
-                <button @click="onUpload" class="btn mt-2" style="float: right">Upload</button>
-            </div>
-        </div> -->
         <div class="file-field input-field">
             <div class="btn grey">
                 <span>Image</span>
-                <input type="file" name="image" @change="onFileChange" >
+                <input type="file" name="image" @change="onFileChange" accept="image/*">
             </div>
             <div class="file-path-wrapper">
                 <input type="text" class="file-path validate">
@@ -100,24 +84,10 @@ export default {
 @import 'materialize-css/dist/css/materialize.min.css';
 
 .profile_pic {
-    margin-left: 120px;
-    width: 450px;
+    margin-top: 10px;
+    margin-left: 100px;
+    width: 400px;
     border-radius: 50%;
     object-fit: cover;
-}
-
-.message-box {
-    display: flex;
-    float: left;
-}
-
-.success {
-    margin-left: 10px;
-    color: rgb(34, 85, 38);
-}
-
-.failed {
-    margin-left: 10px;
-    color: rgb(252, 11, 11);
 }
 </style>

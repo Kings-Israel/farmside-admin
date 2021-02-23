@@ -69,7 +69,7 @@ export default {
 @import 'materialize-css/dist/css/materialize.min.css';
 
 #background {
-    margin-top: 150px;
+    margin-top: 250px;
 }
 #login-form {
     width: 350px;

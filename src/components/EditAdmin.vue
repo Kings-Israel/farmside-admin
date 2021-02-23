@@ -1,5 +1,6 @@
 <template>
     <div id="edit_info">
+        <h3 id="page-header">Admin Info</h3>
         <div class="row">
             <div class="col s12">
                 <div class="col s6">

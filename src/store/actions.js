@@ -42,6 +42,15 @@ let actions = {
             commit('ABOUT_SECTION_SUB_CONTENT', sub.data.sub)
         }
     },
+    async uploadAboutImages({commit}, images) {
+        await axios.post('/about/images', images)
+        .then(response => {
+            console.log(response.data.message)
+            if (response.data.message === 'success') {
+                commit('ABOUT_IMAGES_UPDATED')
+            }
+        })
+    },
     async updateUser({commit}, user) {
         await axios.post(`/user/updateInfo/${user.id}`, user)
         .then(response => {

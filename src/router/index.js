@@ -25,7 +25,8 @@ let router = new Router({
       name: 'Dashboard',
       component: Dashboard,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        transitionName: 'slide'
       },
       children: [
         {
@@ -33,7 +34,8 @@ let router = new Router({
           name: "Bookings",
           component: Bookings,
           meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            transitionName: 'slide'
           }
         },
         {
@@ -41,7 +43,8 @@ let router = new Router({
           name: 'Messages',
           component: Messages,
           meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            transitionName: 'slide'
           }
         },
         {
@@ -49,7 +52,8 @@ let router = new Router({
           name: 'AboutSection',
           component: AboutSection,
           meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            transitionName: 'slide'
           }
         },
         {
@@ -57,7 +61,8 @@ let router = new Router({
           name: 'EditInfo',
           component: EditAdmin,
           meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            transitionName: 'slide'
           }
         }
       ]

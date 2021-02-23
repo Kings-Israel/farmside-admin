@@ -13,15 +13,15 @@
                         v-model="main_section_content"
                     />
                 </div>
-                <button type="submit" class="btn btn-outline-secondary mt-2 w-50">Submit</button>
+                <button type="submit" :disabled="main_section_content == ''" class="btn btn-outline-secondary mt-2 w-50">Submit</button>
             </form>
         </div>
         <hr>
         <div class="row">
             <div class="col 5">
                 <div id="sub_section">
-                    <h5>About Section Sub Content</h5>
                     <form @submit.prevent="uploadSub" id="subForm">
+                    <h5>About Section Sub Content</h5>
                         <div class="input-field col s12">
                             <textarea-autosize
                                 class="textarea"
@@ -31,14 +31,20 @@
                                 v-model="sub_section_content"
                             />
                         </div>
-                        <button type="submit" class="btn btn-outline-secondary mt-2">Submit</button>
+                        <button type="submit" :disabled="sub_section_content == ''" class="btn btn-outline-secondary mt-2">Submit</button>
                     </form>
                 </div>
             </div>
             <div class="col 7">
                 <div id="photos_section">
-                    <h5>About Photos</h5>
-                    <!-- Use vue-uploader-component -->
+                <h5>About Photos</h5>
+                    <uploader
+                        v-model="fileList"
+                        :limit=3
+                        title=""
+                        :autoUpload="false"
+                    ></uploader>
+                    <button @click="uploadPhotos" :disabled="fileList.length != 3" type="submit" class="btn btn-outline-secondary mt-2">Submit</button>
                 </div>
             </div>
         </div>
@@ -52,8 +58,12 @@
 import { mapGetters } from 'vuex'
 import 'material-design-icons/iconfont/material-icons.css'
 import M from 'materialize-css'
+import Uploader from "vux-uploader-component";
 export default {
     name: "AboutSection",
+    components: {
+      Uploader
+    },
     data() {
         return {
             aboutSection: {
@@ -62,6 +72,7 @@ export default {
             },
             main_section_content: '',
             sub_section_content: '',
+            fileList: []
         }
     },
     methods: {
@@ -95,6 +106,19 @@ export default {
                 }
             })
         },
+        uploadPhotos() {
+            const formData = new FormData()
+            formData.append('images', this.fileList[0].blob)
+            formData.append('images', this.fileList[1].blob)
+            formData.append('images', this.fileList[2].blob)
+            this.$store.dispatch('uploadAboutImages', formData).then(() => {
+                if (this.status === 'About Images Updated') {
+                    this.$notify({type: 'success', text: 'About Images Updated'})
+                } else {
+                    this.$notify({type: 'error', text: 'Failed to update images'})
+                }
+            })
+        }
     },
     mounted() {
         M.AutoInit()
@@ -130,6 +154,10 @@ export default {
 }
 
 #subForm {
+    text-align: center;
+}
+
+#photos_section{
     text-align: center;
 }
 </style>

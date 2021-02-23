@@ -67,10 +67,13 @@ export default {
             if (this.form.email === '') {
                 this.form.email = this.user.email
             }
-            if(this.form.phone_number !== '') {
+            if(this.form.phone_number === '') {
+                this.form.phone_number = this.user.phone_number
+            } else {
                 const validPhone = validatePhone(this.form.phone_number)
                 this.errors.phone = validPhone.error
                 this.valid = validPhone.valid
+                
             }
 
             if(this.valid) {

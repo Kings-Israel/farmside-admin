@@ -25,6 +25,9 @@ let mutations = {
     ABOUT_SECTION_SUB_CONTENT(state, subSection) {
         state.aboutSubSection = subSection
     },
+    ABOUT_IMAGES_UPDATED(state) {
+        state.status = 'About Images Updated'
+    },
     USER_UPDATED(state) {
       state.status = 'Updated User'
     },
