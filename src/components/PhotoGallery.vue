@@ -1,6 +1,6 @@
 <template>
-    <div class="bookingsPage">
-        <h4 id="page-header">Bookings</h4>
+    <div>
+        <h4>Photos</h4>
     </div>
 </template>
 
@@ -8,10 +8,10 @@
 import 'material-design-icons/iconfont/material-icons.css'
 import M from 'materialize-css'
 export default {
-    name: 'Bookings',
+    name: 'PhotoGallery',
     mounted() {
         M.AutoInit()
-    }
+    },
 }
 </script>
 

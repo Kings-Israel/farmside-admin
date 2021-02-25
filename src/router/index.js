@@ -4,7 +4,8 @@ import Bookings from '@/components/Bookings'
 import Login from '@/components/Login'
 import Dashboard from '@/components/Dashboard'
 import Messages from '@/components/Messages'
-import AboutSection from '@/components/AboutSection'
+import MainPage from '@/components/MainPage'
+import Gallery from '@/components/Gallery'
 import EditAdmin from '@/components/EditAdmin'
 
 Vue.use(Router)
@@ -48,10 +49,19 @@ let router = new Router({
           }
         },
         {
-          path: 'about',
-          name: 'AboutSection',
-          component: AboutSection,
+          path: '/mainpage',
+          name: 'MainPage',
+          component: MainPage,
           meta: {
+            requiresAuth: true,
+            transitionName: 'slide'
+          }
+        },
+        {
+          path: '/gallery',
+          name: 'Gallery',
+          component: Gallery,
+          maeta: {
             requiresAuth: true,
             transitionName: 'slide'
           }

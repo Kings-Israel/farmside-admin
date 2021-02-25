@@ -1,6 +1,6 @@
 <template>
     <div class="about_section">
-        <h3 id="page-header">About Content</h3>
+        <h4 id="">About Section</h4>
         <div id="main_section">
             <h5>About Section Main Content</h5>
             <form class="col s12" @submit.prevent="uploadMain" id="mainForm">
@@ -18,39 +18,38 @@
         </div>
         <hr>
         <div class="row">
-            <div class="col 5">
-                <div id="sub_section">
-                    <form @submit.prevent="uploadSub" id="subForm">
-                    <h5>About Section Sub Content</h5>
-                        <div class="input-field col s12">
-                            <textarea-autosize
-                                class="textarea"
-                                placeholder="Type Something"
-                                :min-height="50"
-                                :max-height="250"
-                                v-model="sub_section_content"
-                            />
-                        </div>
-                        <button type="submit" :disabled="sub_section_content == ''" class="btn btn-outline-secondary mt-2">Submit</button>
-                    </form>
+            <div class="col s12">
+                <div class="col s5">
+                    <div id="sub_section">
+                        <form @submit.prevent="uploadSub" id="subForm">
+                        <h5>About Section Sub Content</h5>
+                            <div class="input-field col s12">
+                                <textarea-autosize
+                                    class="textarea"
+                                    placeholder="Type Something"
+                                    :min-height="50"
+                                    :max-height="250"
+                                    v-model="sub_section_content"
+                                />
+                            </div>
+                            <button type="submit" :disabled="sub_section_content == ''" class="btn btn-outline-secondary mt-2">Submit</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            <div class="col 7">
-                <div id="photos_section">
-                <h5>About Photos</h5>
-                    <uploader
-                        v-model="fileList"
-                        :limit=3
-                        title=""
-                        :autoUpload="false"
-                    ></uploader>
-                    <button @click="uploadPhotos" :disabled="fileList.length != 3" type="submit" class="btn btn-outline-secondary mt-2">Submit</button>
+                <div class="col s7">
+                    <div id="photos_section">
+                    <h5>About Photos</h5>
+                        <uploader
+                            v-model="fileList"
+                            :limit=3
+                            title=""
+                            :autoUpload="false"
+                        ></uploader>
+                        <button @click="uploadPhotos" :disabled="fileList.length != 3" type="submit" class="btn btn-outline-secondary mt-2">Submit</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <p>{{aboutMainSection.content}}</p>
-        <hr>
-        <p>{{aboutSubSection.content}}</p>
     </div>
 </template>
 
@@ -114,6 +113,7 @@ export default {
             this.$store.dispatch('uploadAboutImages', formData).then(() => {
                 if (this.status === 'About Images Updated') {
                     this.$notify({type: 'success', text: 'About Images Updated'})
+                    this.fileList = []
                 } else {
                     this.$notify({type: 'error', text: 'Failed to update images'})
                 }

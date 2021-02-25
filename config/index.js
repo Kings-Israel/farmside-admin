@@ -75,5 +75,5 @@ module.exports = {
       'window.jQuery': 'jquery',
       jQuery: 'jquery'
     })
-  ]
+  ],
 }

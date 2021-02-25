@@ -58,19 +58,10 @@
                 <div class="sidebar-submenu">
                   <ul>
                     <li>
-                      <router-link :to="{name: 'AboutSection'}">About Section</router-link>
+                      <router-link :to="{name: 'MainPage'}">Main Page</router-link>
                     </li>
                     <li>
-                      <a href="#">Panels</a>
-                    </li>
-                    <li>
-                      <a href="#">Tables</a>
-                    </li>
-                    <li>
-                      <a href="#">Icons</a>
-                    </li>
-                    <li>
-                      <a href="#">Forms</a>
+                      <router-link :to="{name: 'Gallery'}">Gallery</router-link>
                     </li>
                   </ul>
                 </div>
