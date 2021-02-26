@@ -5,6 +5,7 @@
         <about-section />
         <!-- br -->
         <br>
+        <hr>
         <!-- Portfolio Section -->
         <portfolio-section />
     </div>

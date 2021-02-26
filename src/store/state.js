@@ -3,7 +3,9 @@ let state = {
     token: localStorage.getItem('token') || '',
     aboutMainSection: '',
     aboutSubSection: '',
-    user: {}
+    user: {},
+    portfolioImages: '',
+    portfolioVideos: '',
 }
 
 export default state

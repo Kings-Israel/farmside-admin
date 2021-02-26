@@ -19,7 +19,7 @@
         <hr>
         <div class="row">
             <div class="col s12">
-                <div class="col s5">
+                <div class="col s6">
                     <div id="sub_section">
                         <form @submit.prevent="uploadSub" id="subForm">
                         <h5>About Section Sub Content</h5>
@@ -36,7 +36,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="col s7">
+                <div class="col s6">
                     <div id="photos_section">
                     <h5>About Photos</h5>
                         <uploader

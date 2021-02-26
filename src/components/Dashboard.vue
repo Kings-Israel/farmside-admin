@@ -161,6 +161,7 @@ export default {
       },
     },
     mounted() {
+      this.$store.dispatch('portfolioImages')
     },
     created() {
       jQuery(function ($) {

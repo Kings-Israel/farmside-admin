@@ -12,7 +12,6 @@ import TextareaAutosize from 'vue-textarea-autosize'
 import vGallery from 'v-gallery'
 
 axios.defaults.baseURL = 'http://localhost:5000'
-
 Vue.use(vGallery)
 Vue.use(TextareaAutosize)
 Vue.use(Notifications)

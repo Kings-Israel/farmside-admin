@@ -36,6 +36,15 @@ let mutations = {
     },
     PROFILE_PIC_UPDATED(state) {
         state.status = 'Updated Profile Picture'
+    },
+    PORTFOLIO(state, portfolioImages) {
+        state.portfolioImages = portfolioImages
+    },
+    PORTFOLIO_IMAGES_UPDATED(state) {
+        state.status = 'Portfolio Images Updated'
+    },
+    PORTFOLIO_IMAGE_DELETED(state) {
+        state.status = 'Deleted Portfolio Image'
     }
 }
 

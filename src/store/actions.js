@@ -45,7 +45,6 @@ let actions = {
     async uploadAboutImages({commit}, images) {
         await axios.post('/about/images', images)
         .then(response => {
-            console.log(response.data.message)
             if (response.data.message === 'success') {
                 commit('ABOUT_IMAGES_UPDATED')
             }
@@ -63,6 +62,31 @@ let actions = {
         .then(response => {
             commit('PROFILE_PIC_UPDATED')
             commit('USER_INFO', response.data)
+        })
+    },
+    async portfolioImages({commit}) {
+        await axios.get('/portfolio/images')
+        .then(response => {
+            commit('PORTFOLIO', response.data)
+        })
+    },
+    async uploadPortfolioImages({commit}, images) {
+        await axios.post('/portfolio/images', images)
+        .then(response => {
+            console.log(response.data.message)
+            if (response.data.message === 'success') {
+                commit('PORTFOLIO_IMAGES_UPDATED')
+                commit('PORTFOLIO', response.data.images)
+            }
+        })
+    },
+    async deletePortfolioImage({commit}, image) {
+        await axios.delete(`/portfolio/${image}`)
+        .then(response => {
+            if (response.data.message === 'success') {
+                commit('PORTFOLIO_IMAGE_DELETED')
+                commit('PORTFOLIO', response.data.images)
+            }
         })
     },
     logout({commit}){
