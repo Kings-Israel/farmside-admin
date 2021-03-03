@@ -32,6 +32,10 @@ export default {
 
         next()
       })
+  },
+  mounted() {
+    this.$store.dispatch('getBookings')
+    
   }
 }
 </script>

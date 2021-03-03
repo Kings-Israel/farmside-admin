@@ -32,23 +32,16 @@
               </li>
             <li class="sidebar-dropdown">
               <router-link :to="{name: 'Bookings'}">
-                <i class="fa fa-comment"></i>
+                <i class="fas fa-user"></i>
                 <span>Bookings</span>
               </router-link>
             </li>
 
             <li class="sidebar-dropdown">
               <router-link :to="{name: 'Messages'}">
-                <i class="fas fa-user"></i>
+                <i class="fa fa-comment"></i>
                 <span>Messages</span>
               </router-link>
-              <div class="sidebar-submenu">
-                <ul>
-                  <li>
-                    <a href="#">New Bookings</a>
-                  </li>
-                </ul>
-              </div>
             </li>
               <li class="sidebar-dropdown">
                 <a href="#">
@@ -69,7 +62,7 @@
                 <li class="sidebar-dropdown">
                   <a href="#">
                     <i class="fas fa-chart-line"></i>
-                    <span>Charts</span>
+                    <span>Analytics</span>
                   </a>
                   <div class="sidebar-submenu">
                     <ul>
@@ -90,10 +83,7 @@
                   <div class="sidebar-submenu">
                     <ul>
                       <li>
-                        <a href="#">Packages</a>
-                      </li>
-                      <li>
-                        <a href="#">Quotes</a>
+                        <router-link :to="{}">Subscriptions Emails</router-link>
                       </li>
                     </ul>
                   </div>
@@ -161,7 +151,8 @@ export default {
       },
     },
     mounted() {
-      this.$store.dispatch('portfolioImages')
+      this.$store.dispatch('portfolioImages'),
+      this.$store.dispatch('getSubscriptionEmails')
     },
     created() {
       jQuery(function ($) {
@@ -565,7 +556,7 @@ export default {
     display: inline-block;
     width: 100%;
     padding-left: 0px;
-    padding-top: 10px;
+    padding-top: 5px;
   }
   
   .page-wrapper > div {

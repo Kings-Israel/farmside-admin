@@ -67,6 +67,10 @@ let router = new Router({
           }
         },
         {
+          path: '/subscriptionEmails',
+          name: 'SubscriptionsEmails'
+        },
+        {
           path: '/edit_info',
           name: 'EditInfo',
           component: EditAdmin,

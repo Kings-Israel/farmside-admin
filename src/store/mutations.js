@@ -13,6 +13,18 @@ let mutations = {
         state.status = 'Logged Out'
         state.token = ''
     },
+    BOOKINGS(state, bookings) {
+        state.bookings = bookings
+    },
+    DELETE_BOOKING(state) {
+        state.status = 'Booking deleted'
+    },
+    MESSAGES(state, messages) {
+        state.messages = messages
+    },
+    DELETE_MESSAGE(state) {
+        state.status = 'Message deleted'
+    },
     UPDATE_ABOUT_MAIN_SECTION(state) {
         state.status = 'Main Section Updated'
     },
@@ -45,6 +57,12 @@ let mutations = {
     },
     PORTFOLIO_IMAGE_DELETED(state) {
         state.status = 'Deleted Portfolio Image'
+    },
+    PORTFOLIO_VIDEOS(state, portfolioVideos) {
+        state.portfolioVideos = portfolioVideos
+    },
+    PORTFOLIO_VIDEO_UPLOADED(state) {
+        state.status = 'Portfolio video uploaded'
     }
 }
 

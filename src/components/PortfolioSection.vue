@@ -5,12 +5,12 @@
             <div class="col s12">
                 <div class="col s6">
                     <uploader
-                            v-model="fileList"
-                            :limit=5
-                            title=""
-                            :autoUpload="false"
-                        ></uploader>
-                        <button @click="uploadPhotos" :disabled="fileList.length != 5" type="submit" class="btn btn-outline-secondary mt-2">Submit</button>
+                        v-model="fileList"
+                        :limit=5
+                        title=""
+                        :autoUpload="false"
+                    ></uploader>
+                    <button @click="uploadPhotos" :disabled="fileList.length != 5" type="submit" class="btn btn-outline-secondary mt-2">Submit</button>
                 </div>
                 <div class="col s6">
                     <table class="table table-striped">
@@ -25,12 +25,23 @@
                                 <td>{{item.originalName}}</td>
                                 <td class="delete-icon"><i @click="deletePhoto(item.fileName)" class="tiny material-icons">delete</i></td>
                             </tr>
+                            <br>
                             <jw-pagination :items="portfolioImages" :pageSize="5" @changePage="onChangePage" class="pagination"></jw-pagination>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+        <div class="file-field input-field">
+            <div class="btn grey">
+                <span>Image</span>
+                <input type="file" name="image" @change="onFileChange" accept="video/*">
+            </div>
+            <div class="file-path-wrapper">
+                <input type="text" class="file-path validate">
+            </div>
+        </div>
+        <button @click="onUploadVideo" class="btn mt-2 mr-2" style="display: flex; margin-left: 220px;">Upload</button>
     </div>
 </template>
 
@@ -40,9 +51,6 @@ import 'material-design-icons/iconfont/material-icons.css'
 import M from 'materialize-css'
 import { mapGetters } from 'vuex'
 import Uploader from "vux-uploader-component";
-const customStyle = {
-    
-}
 export default {
     name: 'PortfolioSection',
     components: {
@@ -51,6 +59,7 @@ export default {
     data() {
         return {
             fileList: [],
+            video: null,
             pageOfItems: []
         }
     },
@@ -82,6 +91,19 @@ export default {
                     this.$notify({type: 'error', text: `Failed to delete image`})
                 }
             })
+        },
+        onFileChange(e) {
+            this.video = e.target.files || e.dataTransfer.files;
+        },
+        onUploadVideo() {
+            this.$store.dispatch('uploadPortfolioVideo', this.video).then(() => {
+                if (this.status === 'Portfolio video uploaded') {
+                    this.$notify({type: 'success', text: 'Video Uploaded Successfuly'})
+                    console.log(this.portfolioVideos)
+                } else {
+                    this.$notify({type: 'error', text: 'Error Uploading Video'})
+                }
+            })
         }
     },
     created() {
@@ -92,7 +114,7 @@ export default {
     },
     computed: {
         ...mapGetters([
-            'status', 'portfolioImages'
+            'status', 'portfolioImages', 'portfolioVideos'
         ])
     }
 }

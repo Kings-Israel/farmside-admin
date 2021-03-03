@@ -28,6 +28,28 @@ let actions = {
             console.log(error)
         }
     },
+    async getBookings({commit}) {
+        let response = await axios.get('/bookings/bookings')
+        commit('BOOKINGS', response.data.bookings)
+    },
+    async deleteBooking({commit}, id) {
+        let response = await axios.delete(`/bookings/delete/${id}`)
+        if (response.data.message === 'Booking deleted') {
+            commit('DELETE_BOOKING')
+            commit('BOOKINGS', response.data.bookings)
+        }
+    },
+    async getMessages({commit}) {
+        let response = await axios.get('/messages/messages')
+        commit('MESSAGES', response.data.messages)
+    },
+    async deleteMessage({commit}, id) {
+        let response = await axios.delete(`/messages/delete/${id}`)
+        if (response.data.message === 'Message deleted') {
+            commit('DELETE_MESSAGE')
+            commit('MESSAGES', response.data.messages)
+        }
+    },
     async updateAboutMainSection({commit}, content) {
         let main = await axios.post('/about/updateMain', content)
         if (main.data.message === 'success') {
@@ -67,7 +89,7 @@ let actions = {
     async portfolioImages({commit}) {
         await axios.get('/portfolio/images')
         .then(response => {
-            commit('PORTFOLIO', response.data)
+            commit('PORTFOLIO', response.data.images)
         })
     },
     async uploadPortfolioImages({commit}, images) {
@@ -88,6 +110,20 @@ let actions = {
                 commit('PORTFOLIO', response.data.images)
             }
         })
+    },
+    async uploadPortfolioVideo({commit}, video) {
+        await axios.post('/portfolio/video', video)
+        .then(response => {
+            console.log(response.data)
+            if(response.data.message === 'success'){
+                commit('PORTFOLIO_VIDEO_UPLOADED')
+                commit('PORTFOLIO_VIDEOS', response.data.videos)
+            }
+        })
+    },
+    async getSubscriptionEmails({commit}) {
+        const response = await axios.get('/subscription/email')
+        // console.log(response.data)
     },
     logout({commit}){
         axios.get('auth/logout').then(response => {

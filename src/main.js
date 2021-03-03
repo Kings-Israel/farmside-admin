@@ -10,8 +10,10 @@ import axios from 'axios'
 import Notifications from 'vue-notification'
 import TextareaAutosize from 'vue-textarea-autosize'
 import vGallery from 'v-gallery'
+import vUploader from 'v-uploader'
 
 axios.defaults.baseURL = 'http://localhost:5000'
+Vue.use(vUploader)
 Vue.use(vGallery)
 Vue.use(TextareaAutosize)
 Vue.use(Notifications)
