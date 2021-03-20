@@ -11,12 +11,16 @@ import Notifications from 'vue-notification'
 import TextareaAutosize from 'vue-textarea-autosize'
 import vGallery from 'v-gallery'
 import vUploader from 'v-uploader'
+import Vuesax from 'vuesax'
+import 'vuesax/dist/vuesax.css'
+import 'material-icons/iconfont/material-icons.css';
 
 axios.defaults.baseURL = 'http://localhost:5000'
 Vue.use(vUploader)
 Vue.use(vGallery)
 Vue.use(TextareaAutosize)
 Vue.use(Notifications)
+Vue.use(Vuesax)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

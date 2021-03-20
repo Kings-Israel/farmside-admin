@@ -107,7 +107,8 @@ export default {
         }
     },
     created() {
-        M.AutoInit()
+        M.AutoInit(),
+        this.$store.dispatch('portfolioImages')
     },
     mounted() {
         

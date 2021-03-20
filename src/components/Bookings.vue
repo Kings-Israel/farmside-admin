@@ -1,106 +1,119 @@
 <template>
-    <div class="bookingsPage">
-        <h4 id="page-header">Bookings</h4>
-        <div class="row">
-            <div class="col s12">
-                <div class="col s6">
-                    <table class="table table-striped table-dark">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="booking in pageOfItems" :key="booking._id">
-                                <td>{{booking.name}}</td>
-                                <td>{{booking.email}}</td>
-                                <td>
-                                    <button class="btn btn-small view-booking-button" @click="viewOne(booking._id)">View</button>
-                                    <i class="material-icons delete-booking-icon" @click="deleteBooking(booking._id)">delete</i>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <jw-pagination :items="bookings" :pageSize="10" @changePage="onChangePage" class="pagination"></jw-pagination>
-                </div>
-                <div v-if="!name">
-                    <h1 class="ab-message">Select a booking to view</h1>
-                </div>
-                <div v-else class="col s6">
-                    <div class="row">
-                        <div class="col s12">
-                            <div class="col s4">
-                                <p>Client Name:</p>
-                                <h6><b>{{name}}</b></h6>
-                            </div>
-                            <div class="col s4">
-                                <p>Client Email:</p>
-                                <h6><b>{{email}}</b></h6>
-                            </div>
-                            <div class="col s4">
-                                <p>Client Phone Number:</p>
-                                <h6><b>{{phone_number}}</b></h6>
-                            </div>
+  <div class="bookingsPage">
+    <h1 id="page-header">Bookings</h1>
+    <vs-row>
+        <vs-col vs-w="7">
+            <vs-table stripe max-items="4" pagination :data="bookings">
+                <template slot="thead">
+                    <vs-th>
+                    Name
+                    </vs-th>
+                    <vs-th>
+                    Email
+                    </vs-th>
+                    <vs-th>
+                    Status
+                    </vs-th>
+                    <vs-th>
+                    Action
+                    </vs-th>
+                    
+                </template>
+
+                <template slot-scope="{data}">
+                    <vs-tr :key="indextr" v-for="(tr, indextr) in data" >
+                        <vs-td :data="data[indextr].name">
+                            {{data[indextr].name}}
+                        </vs-td>
+
+                        <vs-td :data="data[indextr].email">
+                            {{data[indextr].email}}
+                        </vs-td>
+
+                        <vs-td>
+                            Reviewed
+                        </vs-td>
+
+                        <vs-td :data="data[indextr].id">
+                            <vs-button color='success' type='line' @click="viewOne(data[indextr]._id)">View</vs-button>
+                            <vs-button color='danger' type='line' @click="deleteBooking(data[indextr]._id)">Delete</vs-button>
+                        </vs-td>
+                        
+                    </vs-tr>
+                </template>
+            </vs-table>
+        </vs-col>
+        <vs-col vs-w="5">
+            <div v-if="!name">
+                <h1 class="ab-message">Select a booking to view</h1>
+            </div>
+            <div v-else>
+                <vs-row vs-justify="center">
+                    <vs-col type="flex" vs-justify="center" vs-align="center">
+                        <vs-card>
+                        <div slot="header">
+                            <span id="card-header">
+                                <vs-icon icon="account_circle" class="card-icon"></vs-icon><p>{{ name }}</p>
+                                <vs-icon icon="mail" class="card-icon"></vs-icon><p>{{email}}</p>
+                                <vs-icon icon="phone" class="card-icon"></vs-icon><p>{{phone_number}}</p>
+                            </span>
                         </div>
-                    </div>
-                    <h5>Event Details:</h5>
-                    <div class="row">
-                        <div class="col s12">
-                            <div class="col s4">
+                        <div>
+                            <h4>Event Details</h4>
+                            <span id="event_details">
                                 <p>Event Location:</p>
                                 <h6><b>{{location}}</b></h6>
-                            </div>
-                            <div class="col s4">
+                            </span>
+                            <span id="event_details">
                                 <p>Event Date:</p>
                                 <h6><b>{{formatDate(event_date)}}</b></h6>
-                            </div>
-                            <div class="col s4">
+                            </span>
+                            <span id="event_details">
                                 <p>Event Duration:</p>
                                 <h6><b>{{event_duration}}</b></h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col s6">
-                            <p>Event Type:</p>
-                            <h6><b>{{event_type}}</b></h6>
-                        </div>
-                        <div class="col s6">
-                            <p>Other Description:</p>
-                            <div v-for="(key, detail, i) in event_details" :key="i">
-                                <div v-if="key !== ''">
-                                    <h6 v-if="key !== null">
-                                        <b>{{ formatText(detail) }}: {{ key }}</b>
-                                    </h6>
+                            </span>
+                            <span id="event_details">
+                                <p>Event Type:</p>
+                                <h6><b>{{event_type}}</b></h6>
+                            </span>
+                            <span id="event_details_description">
+                                <h4>More Event Info:</h4>
+                                <div v-for="(key, detail, i) in event_details" :key="i">
+                                    <div v-if="key !== ''">
+                                        <h6 v-if="key !== null">
+                                            <span>
+                                            <p>{{formatText(detail)}}:</p> <b>{{key}}</b>
+                                            </span>
+                                        </h6>
+                                    </div>
                                 </div>
-                            </div>
+                            </span>
                         </div>
-                    </div>
-                </div>
+                        <div slot="footer">
+                            <vs-row vs-justify="flex-end">
+                                <vs-button color="success" type="filled" class="mr-1">Reply</vs-button>
+                                <vs-button color="rgba(24, 24, 24, 0.652)" type="filled">Add to Calendar</vs-button>
+                            </vs-row>
+                        </div>
+                        </vs-card>
+                    </vs-col>
+                </vs-row>
             </div>
-        </div>
-    </div>
+        </vs-col>
+    </vs-row>
+    
+  </div>
 </template>
 
 <script>
 import axios from 'axios'
-import JwPagination from 'jw-vue-pagination'
-import 'material-design-icons/iconfont/material-icons.css'
-import M from 'materialize-css'
 import { mapGetters } from 'vuex'
 export default {
-    name: 'Bookings',
-    components: {
-        JwPagination
-    },
-    data() {
+    data(){
         return {
-            pageOfItems: [],
             name: '',
             email: '',
-            phone: '',
+            phone_number: '',
             location: '',
             event_date: '',
             event_type: '',
@@ -109,9 +122,6 @@ export default {
         }
     },
     methods: {
-        onChangePage(pageOfItems) {
-            this.pageOfItems = pageOfItems
-        },
         async viewOne(id) {
             await axios.get(`/bookings/booking/${id}`).then(response => {
                 let booking = response.data.booking
@@ -145,10 +155,7 @@ export default {
         }
     },
     created() {
-        
-    },
-    mounted() {
-        M.AutoInit()
+        this.$store.dispatch('getBookings')
     },
     computed: {
         ...mapGetters([
@@ -159,25 +166,29 @@ export default {
 </script>
 
 <style scoped>
-@import 'materialize-css/dist/css/materialize.min.css';
-* {
-    margin-left: -10px;
+#card-header {
+    display: inline-flex;
 }
-.view-booking-button {
-    margin-top: -15px;
+#card-header p {
+    font-size: 18px;
+    margin-right: 5px;
 }
-
-.delete-booking-icon {
-    margin-right: -15px;
-    margin-left: 10px;
+.card-icon {
+    padding-right: 5px;
 }
-.delete-booking-icon:hover {
-    color: rgb(220, 0, 0);
-    cursor: pointer;
+#event_details {
+    display: flex;
+}
+#event_details > p {
+    font-size: 16px;
+    margin-right: 10px;
+}
+#event_details > h6 {
+    font-size: 18px;
 }
 .ab-message {
     text-align: center;
     font-weight: bolder;
-    color: rgba(0, 0, 0, 0.3);
+    color: rgba(24, 24, 24, 0.652);
 }
 </style>

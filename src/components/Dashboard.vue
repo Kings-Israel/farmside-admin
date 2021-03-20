@@ -151,8 +151,6 @@ export default {
       },
     },
     mounted() {
-      this.$store.dispatch('portfolioImages'),
-      this.$store.dispatch('getSubscriptionEmails')
     },
     created() {
       jQuery(function ($) {
